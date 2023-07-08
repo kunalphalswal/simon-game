@@ -9,6 +9,12 @@ function press(color){
         $("."+color).removeClass("pressed");
     },100);
 }
+$("#inst").click(function(){
+    $(".modal").css("display","block");
+});
+$(".close").click(function(){
+    $(".modal").css("display","none");
+});
 $(".btn").on("click",function(){
     press($(this).attr("id"));
     userPattern.push($(this).attr("id"));
