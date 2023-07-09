@@ -21,6 +21,47 @@ $(".btn").on("click",function(){
     checkAnswer(userPattern.length-1);
 });
     //make a separate function for level loop and matching loop and call them in click event listener function.
+var level=0;
+var gameStarted=0;
+var gamePattern=[],userPattern=[];
+/*var mediaQuery=window.matchMedia('min-width:800px');
+if(mediaQuery){
+    $("body").on("click",function(event){
+        var elementTag=event.target.tagName;
+        if(elementTag==="body"){
+            if(!gameStarted){
+                gameStarted=1;
+                nextSequence();
+            }
+        }else return;
+    });
+}
+else{*/
+var starter;
+    $(document).on("keydown",function(){
+        if(!gameStarted){
+            gameStarted=1;
+            starter=0;
+            nextSequence();
+        }
+    });
+    $("#start").on("click",function(){
+        if(!gameStarted){
+            gameStarted=1;
+            starter=0;
+            $("#level-title").css("display","block");
+            nextSequence();
+        }
+    });
+//}
+function nextSequence(){
+    level++;
+    userPattern=[];
+    $("h1").text("Level "+level);
+    var index=Math.floor(Math.random()*4);
+    gamePattern.push(boxes[index]);
+    press(boxes[index]);
+}
 function checkAnswer(currentLevel){
     if (gamePattern[currentLevel] === userPattern[currentLevel]) {
         if (userPattern.length === gamePattern.length){
@@ -29,34 +70,18 @@ function checkAnswer(currentLevel){
           }, 1000);
         }
     }else{
-        $("h1").text("game over, press any key to restart");
-            gameOverSound.play();
-            $("body").addClass("game-over");
-            setTimeout(function(){
-                $("body").removeClass("game-over");
-            },200);
-            startOver();
+        if(starter)$("h1").text("game over, press any key to restart");
+        else $("h1").text("game over, press the start button to restart");
+        gameOverSound.play();
+        $("body").addClass("game-over");
+        setTimeout(function(){
+            $("body").removeClass("game-over");
+        },200);
+        startOver();
     }
 }
-var level=0;
-var gameStarted=0;
-var gamePattern=[],userPattern=[];
 function startOver(){
     level=0;gameStarted=0;gamePattern=[];userPattern=[];
-}
-$(document).on("keydown",function(){
-    if(!gameStarted){
-        gameStarted=1;
-        nextSequence();
-    }
-});
-function nextSequence(){
-    level++;
-    userPattern=[];
-    $("h1").text("Level "+level);
-    var index=Math.floor(Math.random()*4);
-    gamePattern.push(boxes[index]);
-    press(boxes[index]);
 }/*
 function game(){
     $(document).on("keydown",function(){
