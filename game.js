@@ -37,18 +37,16 @@ if(mediaQuery){
     });
 }
 else{*/
-var starter;
+const screenWidth=window.innerWidth;
     $(document).on("keydown",function(){
         if(!gameStarted){
             gameStarted=1;
-            starter=1;
             nextSequence();
         }
     });
     $("#start").on("click",function(){
         if(!gameStarted){
             gameStarted=1;
-            starter=0;
             $("#level-title").css("display","block");
             nextSequence();
         }
@@ -70,7 +68,7 @@ function checkAnswer(currentLevel){
           }, 1000);
         }
     }else{
-        if(starter)$("h1").text("game over, press any key to restart");
+        if(screenWidth>800)$("h1").text("game over, press any key to restart");
         else $("h1").text("game over, press the start button to restart");
         gameOverSound.play();
         $("body").addClass("game-over");
