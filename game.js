@@ -41,7 +41,7 @@ var starter;
     $(document).on("keydown",function(){
         if(!gameStarted){
             gameStarted=1;
-            starter=0;
+            starter=1;
             nextSequence();
         }
     });
