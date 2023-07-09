@@ -114,5 +114,13 @@ body {
   #level-title{
     display:none;
   }
+  .btn {
+    margin: 10px;
+    height: 100px;
+    width: 100px;
+  }
+  #level-title {
+    font-size: 0.5rem;
+  } 
 }
 
